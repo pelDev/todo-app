@@ -1,21 +1,25 @@
 import React from 'react';
-import './App.scss';
 import WebFont from 'webfontloader';
 import Appbar from './components/Appbar';
+import Actionbar from './components/Actionbar';
 
 function App() {
   React.useEffect(() => {
     WebFont.load({
       google: {
-        families: ['Droid Sans', 'Chilanka']
+        families: ['Work Sans', 'Inter']
       }
     });
   }, []);
 
   return (
-    <div className="App">
+    <>
       <Appbar />
-    </div>
+
+      <div className="container-fluid p-4">
+        <Actionbar />
+      </div>
+    </>
   );
 }
 
