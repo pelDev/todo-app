@@ -6,7 +6,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export default function CustomIconButton(props: Props) {
-    const { children, ...others } = props;
+    const { children, className, ...others } = props;
 
     const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -23,12 +23,12 @@ export default function CustomIconButton(props: Props) {
 
         setTimeout(() => {
             ripple.remove();
+            others.onClick && others.onClick(e);
         }, 300);
     }
 
     const hanldeClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
         showRipple(e);
-        others.onClick && others.onClick(e);
     }
 
     return (
@@ -37,7 +37,7 @@ export default function CustomIconButton(props: Props) {
             {...others}
             ref={buttonRef}
             onClick={hanldeClick}
-            className={`custom-icon-button position-relative`}
+            className={`custom-icon-button position-relative ${className}`}
         >
             {children}
         </button>

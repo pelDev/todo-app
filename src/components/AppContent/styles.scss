@@ -40,6 +40,35 @@
                     }
                 }
             }
+
+            .reminder-tile {
+                gap: 16px;
+                font-size: 1.6rem;
+                font-weight: 500;
+                font-family: 'Inter';
+                color: var(--gray-500);
+                
+                .bellIcon {
+                    height: 16px;
+                    width: 16px;
+                    fill: #667085;
+                }
+                
+                .close {
+                    svg {
+                        height: 16px;
+                        width: 16px;
+                    }
+                }
+            }
+
+            .actions {
+                gap: 16px;
+
+                .custom-button {
+                    flex: 1;
+                }
+            }
         }
     }
 }

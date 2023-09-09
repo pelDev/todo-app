@@ -1,37 +1,9 @@
-@keyframes ripple {
-    from {
-        opacity: 1;
-        transform: scale(0);
-    }
-
-    to {
-        opacity: 0;
-        transform: scale(10);
-    }
-}
-
 .custom-icon-button {
+    padding: 2px 4px;
     outline: none;
     border: none;
-    padding: 10px 16px;
-    border-radius: 9999px;
+    border-radius: 50%;
     cursor: pointer;
     overflow: hidden;
     background-color: transparent;
-
-    &>span {
-        position: absolute;
-        border-radius: 50%;
-        /* To make it round */
-        background-color: rgba(0, 0, 0, 0.3);
-
-        width: 100px;
-        height: 100px;
-        margin-top: -50px;
-        /* for positioning */
-        margin-left: -50px;
-
-        animation: ripple 1s;
-        opacity: 0;
-    }
 }

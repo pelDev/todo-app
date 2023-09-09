@@ -3,7 +3,7 @@ import "./styles.scss";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     title: string;
-    variant?: "primary";
+    variant?: "primary" | "secondary";
     leftIcon?: React.ReactNode; 
 }
 
@@ -25,12 +25,12 @@ export default function CustomButton(props: Props) {
 
         setTimeout(() => {
             ripple.remove();
+            others.onClick && others.onClick(e);
         }, 300);
     }
 
     const hanldeClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
         showRipple(e);
-        others.onClick && others.onClick(e);
     }
 
     return (
@@ -38,7 +38,7 @@ export default function CustomButton(props: Props) {
             {...others}
             ref={buttonRef}
             onClick={hanldeClick}
-            className={`custom-button ${variant} position-relative d-flex flex-row align-items-center`}
+            className={`custom-button ${variant} position-relative d-flex flex-row align-items-center justify-content-center`}
         >
             {leftIcon && leftIcon}
 
