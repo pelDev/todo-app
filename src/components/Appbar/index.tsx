@@ -1,8 +1,12 @@
+import { useEffect } from "react";
 import { defaultAvatar } from "../../assets/images";
 import { BellIcon, GearIcon } from "../../assets/svg";
 import "./styles.scss";
+import { logger } from "../../utils";
 
 export default function Appbar() {
+    useEffect(() => logger("Render Appbar"), []);
+
     return (
         <header className="app-bar">
             <div className="container d-flex flex-row justify-content-between align-items-center p-4">
