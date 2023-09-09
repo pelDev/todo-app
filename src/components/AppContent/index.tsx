@@ -5,6 +5,7 @@ import { TaskFormMode, TodoActionState } from "../../constants";
 import { UseTodoActionController } from "../../hooks/useTodoActionController";
 import { logger } from "../../utils";
 import TaskForm from "./TaskForm";
+import AutoAnimateHeight from "../AutoAnimateHeight";
 
 interface Props {
     todoController: UseTodoActionController;
@@ -29,9 +30,9 @@ export default function AppContent(props: Props) {
         <div className="app-content container d-flex flex-row py-4">
             <div className="todo-content-container"></div>
 
-            <div className="todo-actions-container">
+            <AutoAnimateHeight className="todo-actions-container">
                 {todoActionComponent}
-            </div>
+            </AutoAnimateHeight>
         </div>
     );
 }

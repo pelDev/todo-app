@@ -33,6 +33,7 @@ export default function CustomIconButton(props: Props) {
 
     return (
         <button 
+            type="button"
             {...others}
             ref={buttonRef}
             onClick={hanldeClick}
