@@ -1,9 +1,17 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import "./styles.scss";
 import CustomButton from "../Button";
 import { AddIcon } from "../../assets/svg";
+import { UseTodoActionController } from "../../hooks/useTodoActionController";
+import { logger } from "../../utils";
 
-export default function Actionbar() {
+interface Props {
+    todoController: UseTodoActionController;
+}
+
+export default function Actionbar(props: Props) {
+    useEffect(() => logger("Render Actionbar"), []);
+
     const getGreeting = useCallback(() => {
         const today = new Date();
         const hour = today.getHours();
@@ -31,7 +39,7 @@ export default function Actionbar() {
             <CustomButton 
                 title="Create New Task"
                 leftIcon={<AddIcon />}
-                onClick={() => {}}
+                onClick={props.todoController.openCreate}
             />
         </div>
     );
