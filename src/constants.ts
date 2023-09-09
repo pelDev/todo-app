@@ -4,3 +4,8 @@ export enum TodoActionState {
     EDIT,
     VIEW
 }
+
+export enum TaskFormMode {
+    ADD,
+    EDIT
+}
