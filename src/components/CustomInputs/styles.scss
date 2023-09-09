@@ -1,0 +1,16 @@
+.custom-input {
+    width: 100%;
+
+    color: var(--gray-500, #667085);
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+
+    outline: none;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--gray-300, #D0D5DD);
+    background: var(--gray-50, #F9FAFB);
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+}

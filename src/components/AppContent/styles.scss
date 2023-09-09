@@ -8,62 +8,13 @@
 
     .todo-actions-container {
         flex: 1;
-        min-width: 300px;
+        min-width: 440px;
         padding: 20px 24px;
         border-radius: 8px;
         border: 1px solid var(--gray-100, #F2F4F7);
         background: var(--base-white, #FFF);
         box-shadow: 0px 8px 8px -4px rgba(16, 24, 40, 0.03), 0px 20px 24px -4px rgba(16, 24, 40, 0.08);
         overflow: hidden;
-
-        .react-calendar {
-            width: 100%;
-            border: none;
-
-            &__tile {
-                border-radius: 20px;
-                height: 40px;
-                width: 40px;
-                position: relative;
-                font-family: 'Work Sans';
-                color: var(--gray-700, #344054);
-
-                &--now {
-                    background-color: var(--gray-100, #F2F4F7);
-
-                    &:hover {
-                        background-color: var(--gray-100, #F2F4F7);
-                    }
-                }
-
-                &--active {
-                    background-color: var(--primary-color);
-                    color: var(--base-white, #fff);
-
-                    &:focus {
-                        background-color: var(--primary-color);
-                        color: var(--base-white, #fff);
-                    }
-
-                    &:hover {
-                        background-color: rgba($color: #3F5BF6, $alpha: 0.7);
-                        color: var(--base-white, #fff);
-                    }
-                }
-
-                &.hasTask::before {
-                    content: "";
-                    position: absolute;
-                    height: 3px;
-                    width: 3px;
-                    border-radius: 50%;
-                    bottom: 8px;
-                    background-color: #3F5BF6;
-                    left: 50%;
-                    transform: translateX(-50%);
-                }
-            }
-        }
 
         .task-form {
             width: 100%;
@@ -76,6 +27,17 @@
                     font-style: normal;
                     font-weight: 600;
                     line-height: 155.556%;
+                }
+            }
+
+            & > .date-time-inputs {
+                gap: 16px;
+
+                input.custom-input {
+                    flex: 1;
+                    &:first-child {
+                        min-width: 150px;
+                    }
                 }
             }
         }
