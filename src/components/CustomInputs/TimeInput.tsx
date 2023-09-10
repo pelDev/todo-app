@@ -1,7 +1,9 @@
-interface Props extends React.HTMLAttributes<HTMLInputElement>  {}
+interface Props<T extends object> extends React.InputHTMLAttributes<HTMLInputElement>  {
+    inputName?: keyof T;
+}
 
-export function TimeInput(props: Props) {
-    const { ...others } = props;
+export function TimeInput<T extends object>(props: Props<T>) {
+    const { inputName, ...others } = props;
 
-    return <input placeholder="00:00" {...others} type="time" className="custom-input time" />
+    return <input placeholder="00:00" {...others} type="time" className="custom-input time" name={inputName as string} />
 }

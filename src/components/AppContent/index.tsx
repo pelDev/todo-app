@@ -14,17 +14,17 @@ interface Props {
 export default function AppContent(props: Props) {
     useEffect(() => logger("Render AppContent"), []);
 
-    const { todoActionState, dateSelected, onDateChange, resetTodoActionState } = props.todoController;
+    const { todoActionState, dateSelected, onDateChange, resetTodoActionState, createTodo } = props.todoController;
 
     const todoActionComponent = useMemo(() => {
         switch (todoActionState) {
             case TodoActionState.DEFAULT:
-                return <DatePicker value={dateSelected} onChange={onDateChange} />;
+                return <DatePicker value={new Date(dateSelected)} onChange={onDateChange} />;
 
             case TodoActionState.ADD:
-                return <TaskForm close={resetTodoActionState} taskFormMode={TaskFormMode.ADD} />;
+                return <TaskForm close={resetTodoActionState} taskFormMode={TaskFormMode.ADD} dateSelected={dateSelected} createTodo={createTodo} />;
         }
-    }, [todoActionState, dateSelected, onDateChange, resetTodoActionState]);
+    }, [todoActionState, dateSelected, onDateChange, resetTodoActionState, createTodo]);
 
     return (
         <div className="app-content container d-flex flex-row py-4">
