@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import "./styles.scss";
+import { RIPPLE_DELAY } from "../../constants";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     children: React.ReactNode; 
@@ -24,7 +25,7 @@ export default function CustomIconButton(props: Props) {
         setTimeout(() => {
             ripple.remove();
             others.onClick && others.onClick(e);
-        }, 300);
+        }, RIPPLE_DELAY);
     }
 
     const hanldeClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {

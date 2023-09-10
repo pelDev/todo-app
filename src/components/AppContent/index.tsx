@@ -17,7 +17,6 @@ export default function AppContent(props: Props) {
     useEffect(() => logger("Render AppContent"), []);
 
     const { todoActionState, dateSelected, onDateChange, resetTodoActionState, createTodo } = props.todoController;
-    const todos = useSelector(selectTodos);
 
     const todoActionComponent = useMemo(() => {
         switch (todoActionState) {
@@ -28,8 +27,6 @@ export default function AppContent(props: Props) {
                 return <TaskForm close={resetTodoActionState} taskFormMode={TaskFormMode.ADD} dateSelected={dateSelected} createTodo={createTodo} />;
         }
     }, [todoActionState, dateSelected, onDateChange, resetTodoActionState, createTodo]);
-
-    useEffect(() => logger(todos), [todos]);
 
     return (
         <div className="app-content container d-flex flex-row py-4">

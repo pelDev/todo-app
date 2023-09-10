@@ -9,3 +9,5 @@ export enum TaskFormMode {
     ADD,
     EDIT
 }
+
+export const RIPPLE_DELAY = 300;

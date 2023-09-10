@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { CloseIcon } from "../../assets/svg";
-import { TaskFormMode } from "../../constants";
+import { RIPPLE_DELAY, TaskFormMode } from "../../constants";
 import CustomIconButton from "../IconButton";
 import { TextArea, DateInput, TimeInput } from "../CustomInputs";
 import ReminderTile from "./RemiderTile";
@@ -51,12 +51,14 @@ export default function TaskForm(props: Props) {
         
         if (error) return setError(error);
 
-        props.createTodo({
+        const create = () => props.createTodo({
             date: taskForm.date,
             start: taskForm.start,
             end: taskForm.end,
             title: taskForm.title
         });
+
+        setTimeout(create, RIPPLE_DELAY);
     }
 
     const handleChange: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> = (e) => {
