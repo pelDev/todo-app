@@ -1,0 +1,14 @@
+.custom-alert {
+    border-radius: 8px;
+    padding: 10px 14px;
+    text-align: start;
+    font-size: 1.4rem;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+
+    &.error {
+        background-color: rgb(246, 219, 219);
+        border: 1px solid rgb(241, 156, 156);
+        color: rgb(188, 83, 83);
+    }
+}

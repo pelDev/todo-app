@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { CloseIcon } from "../../assets/svg";
 import { TaskFormMode } from "../../constants";
 import CustomIconButton from "../IconButton";
@@ -8,6 +8,7 @@ import CustomButton from "../Button";
 import { useForm } from "../../hooks/useForm";
 import { FormInput } from "../../react-app-env";
 import { taskDate, taskEnd, taskStart, taskTitle } from "../../validators";
+import Alert from "../Alert";
 
 interface Props {
     dateSelected?: string;
@@ -39,12 +40,23 @@ export default function TaskForm(props: Props) {
         validators: { title: taskTitle, start: taskStart, end: taskEnd, date: taskDate }
     });
 
+    const [error, setError] = useState(""); 
+
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
 
+        setError(""); // clear existing error
+
         const error = taskForm.validate();
         
-        console.log("[error]", error);
+        if (error) return setError(error);
+
+        props.createTodo({
+            date: taskForm.date,
+            start: taskForm.start,
+            end: taskForm.end,
+            title: taskForm.title
+        });
     }
 
     const handleChange: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> = (e) => {
@@ -56,6 +68,8 @@ export default function TaskForm(props: Props) {
             taskForm.onChange('date', props.dateSelected);
         }
     }, [props.dateSelected, props.taskFormMode]);
+
+    useEffect(() => setError(""), [taskForm.date, taskForm.end, taskForm.title, taskForm.start]);
 
     return (
         <form className="task-form" onSubmit={handleSubmit}>
@@ -97,6 +111,8 @@ export default function TaskForm(props: Props) {
             <div className="reminder-container mt-4">
                 <ReminderTile />
             </div>
+
+            <Alert variant="error" message={error} />
 
             <div className="actions d-flex flex-row flex-wrap mt-5">
                 <CustomButton

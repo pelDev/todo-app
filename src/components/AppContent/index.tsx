@@ -6,6 +6,8 @@ import { UseTodoActionController } from "../../hooks/useTodoActionController";
 import { logger } from "../../utils";
 import TaskForm from "./TaskForm";
 import AutoAnimateHeight from "../AutoAnimateHeight";
+import { useSelector } from "react-redux";
+import { selectTodos } from "../../redux-store/features/todoSlice";
 
 interface Props {
     todoController: UseTodoActionController;
@@ -15,6 +17,7 @@ export default function AppContent(props: Props) {
     useEffect(() => logger("Render AppContent"), []);
 
     const { todoActionState, dateSelected, onDateChange, resetTodoActionState, createTodo } = props.todoController;
+    const todos = useSelector(selectTodos);
 
     const todoActionComponent = useMemo(() => {
         switch (todoActionState) {
@@ -25,6 +28,8 @@ export default function AppContent(props: Props) {
                 return <TaskForm close={resetTodoActionState} taskFormMode={TaskFormMode.ADD} dateSelected={dateSelected} createTodo={createTodo} />;
         }
     }, [todoActionState, dateSelected, onDateChange, resetTodoActionState, createTodo]);
+
+    useEffect(() => logger(todos), [todos]);
 
     return (
         <div className="app-content container d-flex flex-row py-4">

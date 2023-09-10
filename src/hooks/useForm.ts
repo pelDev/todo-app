@@ -51,7 +51,7 @@ export const useForm = <T extends object>(props: Props<T>) => {
                 const validator = validators[key as keyof T];
 
                 if (validator && typeof validator === "function") {
-                    const error = validator(form[key as keyof T]);
+                    const error = validator(form[key as keyof T], form);
 
                     if (error) return error;
                 }
