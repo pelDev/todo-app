@@ -1,15 +1,16 @@
-import React, { useRef } from "react";
+import React, { ReactNode, useRef } from "react";
 import "./styles.scss";
 import { RIPPLE_DELAY } from "../../constants";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    title: string;
+    title?: string;
+    children?: ReactNode;
     variant?: "primary" | "secondary";
     leftIcon?: React.ReactNode; 
 }
 
 export default function CustomButton(props: Props) {
-    const { title, leftIcon, variant = "primary", ...others } = props;
+    const { children, title, leftIcon, variant = "primary", ...others } = props;
 
     const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -39,11 +40,20 @@ export default function CustomButton(props: Props) {
             {...others}
             ref={buttonRef}
             onClick={hanldeClick}
-            className={`custom-button ${variant} position-relative d-flex flex-row align-items-center justify-content-center`}
+            className={`custom-button ${variant} position-relative d-flex flex-row align-items-center justify-content-center ${others.className}`}
         >
-            {leftIcon && leftIcon}
+            {Boolean(children) ? 
+                (
+                    children
+                ) :
+                (
+                    <>
+                        {leftIcon && leftIcon}
 
-            {title}
+                        {title && title}
+                    </>
+                )
+            }
         </button>
     );
 }
