@@ -23,7 +23,7 @@ export default function HorizontalCalendar(props: Props) {
             <div className="horizontal-calendar w-100 d-flex flex-row">
                 {
                     dates.map((date, idx) => (
-                        <DayCard key={`day-card-${idx}`} date={date} selected={isDateSame(date, todoDateFilter)} />
+                        <DayCard key={`day-card-${idx}`} date={date} selected={isDateSame(date, todoDateFilter)} onClick={() => onTodoDateFilterChange(date)} />
                     ))
                 }
             </div>
