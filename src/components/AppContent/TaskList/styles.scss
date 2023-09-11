@@ -17,6 +17,7 @@
         background: var(--gray-50, #F9FAFB);
         padding: 16px 24px;
         gap: 16px;
+        transition: all 0.2s linear;
 
         .left {
             gap: 16px;
@@ -51,6 +52,20 @@
             font-style: normal;
             font-weight: 400;
             line-height: 142.857%;
+        }
+
+        &.complete {
+            .left {
+                & > div {
+                    span {
+                        color: #D0D5DD;
+                        font-family: 'Inter';
+                        font-style: normal;
+                        font-weight: 400;
+                        text-decoration-line: line-through;
+                    }
+                }
+            }
         }
     }
 }

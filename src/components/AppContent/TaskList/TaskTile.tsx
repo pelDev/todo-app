@@ -27,7 +27,7 @@ export default function TaskTile(props: Props) {
     };
 
     return (
-        <div className="task-tile d-flex flex-row align-items-center justify-content-between">
+        <div className={`task-tile d-flex flex-row align-items-center justify-content-between ${todo.complete ? 'complete' : ''}`}>
             <div className="left d-flex flex-row align-items-center">
                 <Checkbox isChecked={todo.complete} onChecked={onChecked} />
 
