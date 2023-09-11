@@ -9,6 +9,7 @@ import { useForm } from "../../hooks/useForm";
 import { FormInput, Todo } from "../../react-app-env";
 import { taskDate, taskEnd, taskStart, taskTitle } from "../../validators";
 import Alert from "../Alert";
+import { logger } from "../../utils";
 
 interface Props {
     dateSelected?: string;
@@ -28,6 +29,8 @@ const defaultTaskFormState: FormInput = {
 }
 
 export default function TaskForm(props: Props) {
+    useEffect(() => logger('render TaskForm'), []);
+
     const { selectedTodo } = props;
 
     const titleHeader = useMemo(() => {
@@ -87,14 +90,14 @@ export default function TaskForm(props: Props) {
     useEffect(() => setError(""), [taskForm.date, taskForm.end, taskForm.title, taskForm.start]);
 
     useEffect(() => {
-        if (selectedTodo?.id) {
+        if (selectedTodo?.id && props.taskFormMode === TaskFormMode.EDIT) {
             taskForm.onChange("title", selectedTodo.title);
             taskForm.onChange("start", selectedTodo.start);
             taskForm.onChange("end", selectedTodo.end);
             taskForm.onChange("date", selectedTodo.date);
         }
         // eslint-disable-next-line
-    }, [selectedTodo, taskForm.onChange]);
+    }, [selectedTodo, taskForm.onChange, props.taskFormMode]);
 
     return (
         <form className="task-form" onSubmit={handleSubmit}>

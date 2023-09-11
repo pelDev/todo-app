@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { FormError, Validator } from "../react-app-env";
 
 export const getDefaultFormErrors = <T extends object>(initialState: T) => {
@@ -26,9 +26,9 @@ export const useForm = <T extends object>(props: Props<T>) => {
 		getDefaultFormErrors<T>(initialState)
 	);
 
-    const onChange = (name: keyof T, value: T[keyof T]) => {
+    const onChange = useCallback((name: keyof T, value: T[keyof T]) => {
         setForm((prev) => ({ ...prev, [name]: value }));
-    };
+    }, []);
 
     const reset = () => {
 		setForm(initialState);
