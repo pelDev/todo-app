@@ -4,7 +4,7 @@ import { FormError, Validator } from "../react-app-env";
 export const getDefaultFormErrors = <T extends object>(initialState: T) => {
     const result: Record<string, null> = {};
 
-    Object.keys(initialState).map((key) => {
+    Object.keys(initialState).forEach((key) => {
         result[key] = null;
         return;
     });

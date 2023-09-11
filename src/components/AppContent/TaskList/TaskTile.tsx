@@ -1,6 +1,6 @@
 import { useCallback, useRef } from "react";
 import { Todo } from "../../../react-app-env";
-import { isDateSame, logger } from "../../../utils";
+import { isDateSame } from "../../../utils";
 import { Checkbox } from "../../CustomInputs";
 import { useAppDispatch } from "../../../hooks/store";
 import { updateTodo } from "../../../redux-store/features/todoSlice";

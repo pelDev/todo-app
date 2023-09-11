@@ -20,7 +20,7 @@ export default function Pagination(props: Props) {
 
     const paginationRange = usePagination(props);
 
-    if (currentPage === 0 || paginationRange.length === 0) {
+    if (currentPage === 0 || paginationRange.length < 2) {
         return null;
     }
 

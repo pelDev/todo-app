@@ -40,6 +40,7 @@ export default function Actionbar(props: Props) {
                 title="Create New Task"
                 leftIcon={<AddIcon />}
                 onClick={props.todoController.openCreate}
+                className="d-none d-md-block"
             />
         </div>
     );

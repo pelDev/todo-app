@@ -17,6 +17,7 @@ interface Props {
     taskFormMode: TaskFormMode;
     createTodo?: (data: FormInput) => void;
     editTodo?: (data: Todo) => void;
+    closeModal: VoidFunction;
 }
 
 const defaultTaskFormState: FormInput = {
@@ -80,7 +81,8 @@ export default function TaskForm(props: Props) {
         if (props.dateSelected && props.taskFormMode === TaskFormMode.ADD) {
             taskForm.onChange('date', props.dateSelected);
         }
-    }, [props.dateSelected, props.taskFormMode]);
+    // eslint-disable-next-line
+    }, [props.dateSelected, props.taskFormMode, taskForm.onChange]);
 
     useEffect(() => setError(""), [taskForm.date, taskForm.end, taskForm.title, taskForm.start]);
 
@@ -91,7 +93,8 @@ export default function TaskForm(props: Props) {
             taskForm.onChange("end", selectedTodo.end);
             taskForm.onChange("date", selectedTodo.date);
         }
-    }, [selectedTodo?.id]);
+        // eslint-disable-next-line
+    }, [selectedTodo, taskForm.onChange]);
 
     return (
         <form className="task-form" onSubmit={handleSubmit}>

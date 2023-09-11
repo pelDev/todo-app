@@ -3,7 +3,7 @@ import { TodoActionState } from "../constants";
 import { FormInput, Todo } from "../react-app-env";
 import { useAppDispatch } from "./store";
 import { addTodo, removeTodo, updateTodo } from "../redux-store/features/todoSlice";
-import { convertDateToInputString, logger } from "../utils";
+import { convertDateToInputString } from "../utils";
 
 export const useTodoActionController = () => {
     const dispatch = useAppDispatch();
@@ -15,35 +15,30 @@ export const useTodoActionController = () => {
 
     const openCreate = () => setTodoActionState(TodoActionState.ADD);
     const openView = (todo: Todo) => {
-        logger("view todo", todo);
         setSelectedTodo(todo);
         setTodoActionState(TodoActionState.VIEW);
     }
     const clearSelectedTodo = () => setSelectedTodo(null);
-    const resetTodoActionState = () => { 
+    const resetTodoActionState = () => {
+        setDateSelected(convertDateToInputString(new Date()));
         setTodoActionState(TodoActionState.DEFAULT);
         setSelectedTodo(null);
     }
+    
     const onDateChange = (date: Date) => {
         setDateSelected(convertDateToInputString(date));
         setTodoDateFilter(date);
     }
     const onTodoDateFilterChange = setTodoDateFilter;
 
-    const reset = () => {
-        setDateSelected(convertDateToInputString(new Date()));
-        setTodoActionState(TodoActionState.DEFAULT);
-        setSelectedTodo(null);
-    }
-
     const createTodo = (data: FormInput) => {
         dispatch(addTodo(data));
-        reset();
+        resetTodoActionState();
     }
 
     const editTodo = (data: Todo) => {
         dispatch(updateTodo(data)); 
-        reset(); 
+        resetTodoActionState(); 
     }
 
     const goToEdit = () => {

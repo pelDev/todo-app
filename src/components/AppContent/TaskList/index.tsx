@@ -48,7 +48,7 @@ export default function TaskList(props: Props) {
                 {
                     useMemo(() => sliceIntoChunks(filtered, PAGE_SIZE)[currentPage - 1]?.map((todo) => (
                         <TaskTile key={`task-tile-${todo.id}`} todo={todo} selectTodo={props.selectTodo} selected={todo.id === props.selectedTodo?.id}/>
-                    )), [filtered, currentPage, props.selectedTodo])
+                    )), [filtered, currentPage, props.selectedTodo, props.selectTodo])
                 }
             </div>
 
