@@ -14,6 +14,7 @@ export interface Todo {
     date: string;
     start: string;
     end: string;
+    complete: boolean;
 }
 
-export type FormInput = Omit<Todo, "id">;
+export type FormInput = Omit<Todo, "id", "complete">;

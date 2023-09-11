@@ -6,9 +6,8 @@ import { UseTodoActionController } from "../../hooks/useTodoActionController";
 import { logger } from "../../utils";
 import TaskForm from "./TaskForm";
 import AutoAnimateHeight from "../AutoAnimateHeight";
-import { useSelector } from "react-redux";
-import { selectTodos } from "../../redux-store/features/todoSlice";
 import HorizontalCalendar from "../HorizontalCalendar";
+import TaskList from "./TaskList";
 
 interface Props {
     todoController: UseTodoActionController;
@@ -33,6 +32,8 @@ export default function AppContent(props: Props) {
         <div className="app-content container d-flex flex-row py-4">
             <AutoAnimateHeight className="todo-content-container">
                 <HorizontalCalendar dateSelected={dateSelected} todoDateFilter={todoDateFilter} onTodoDateFilterChange={onTodoDateFilterChange} />
+
+                <TaskList />
             </AutoAnimateHeight>
 
             <AutoAnimateHeight className="todo-actions-container">

@@ -15,3 +15,43 @@
     background: var(--gray-50, #F9FAFB);
     box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
 }
+
+.checkbox-wrapper {
+    input[type="checkbox"] {
+        /* removing default appearance */
+        -webkit-appearance: none;
+        appearance: none;
+        /* creating a custom design */
+        width: 20px;
+        height: 20px;
+        border-radius: 6px;
+        border: 1px solid var(--gray-300, #D0D5DD);
+        background: var(--base-white, #FFF);
+        outline: none;
+        cursor: pointer;
+        transition: all 0.2s linear;
+        padding: 3px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    input:checked {
+        border: 1px solid #3F5BF6;
+        background: var(--primary-50, #F9F5FF);
+        position: relative;
+
+        &::before {
+            content: "";
+            height: 12px;
+            width: 6px;
+            border-bottom: 2px solid #3F5BF6;
+            border-right: 2px solid #3F5BF6;
+            position: absolute;
+            right: 50%;
+            top: 0;
+            margin-top: 35%;
+            transform: rotate(45deg) translateY(-50%);
+        }
+    }
+}

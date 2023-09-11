@@ -1,0 +1,56 @@
+.task-list {
+ 
+    h5 {
+        color: var(--gray-900, #101828);
+        font-size: 1.6rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 150%;
+    }
+
+    .task-container {
+        gap: 16px;
+    }
+
+    .task-tile {
+        border-bottom: 1px solid var(--gray-200, #EAECF0);
+        background: var(--gray-50, #F9FAFB);
+        padding: 16px 24px;
+        gap: 16px;
+
+        .left {
+            gap: 16px;
+
+            & > div {
+                span {
+                    display: block;
+
+                    &.title {
+                        color: var(--gray-900, #101828);
+                        font-size: 1.4rem;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: 142.857%;
+                        text-transform: capitalize;
+                    }
+
+                    &.time-range {
+                        color: var(--gray-600, #475467);
+                        font-size: 1.4rem;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 142.857%;
+                    }
+                }
+            }
+        }
+
+        .right {
+            color: var(--gray-600, #475467);
+            font-size: 1.4rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 142.857%;
+        }
+    }
+}

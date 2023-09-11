@@ -20,7 +20,7 @@ export const todoSlice = createSlice({
             state.todos = action.payload;
         },
         addTodo: (state, action: PayloadAction<FormInput>) => {
-            state.todos = [{ id: state.todos.length + 1, ...action.payload}, ...state.todos];
+            state.todos = [{ id: state.todos.length + 1, ...action.payload, complete: false}, ...state.todos];
         },
         removeTodo: (state, action: PayloadAction<Todo>) => {
             state.todos = state.todos.filter((todo) => todo.id !== action.payload.id);
