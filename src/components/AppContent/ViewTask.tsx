@@ -7,6 +7,8 @@ import CustomIconButton from "../IconButton";
 interface Props {
     todo: Todo;
     close: VoidFunction;
+    goToEdit: VoidFunction;
+    handleDelete: VoidFunction;
 }
 
 export default function ViewTask(props: Props) {
@@ -48,10 +50,12 @@ export default function ViewTask(props: Props) {
                 <CustomButton
                     title="Delete"
                     variant="secondary"
+                    onClick={props.handleDelete}
                 />
 
                 <CustomButton
                     title="Edit"
+                    onClick={props.goToEdit}
                 />
             </div>
         </div>

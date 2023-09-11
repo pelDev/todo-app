@@ -17,7 +17,7 @@ interface Props {
 export default function AppContent(props: Props) {
     useEffect(() => logger("Render AppContent"), []);
 
-    const { selectedTodo, todoDateFilter, todoActionState, dateSelected, onDateChange, resetTodoActionState, createTodo, onTodoDateFilterChange, openView, clearSelectedTodo } = props.todoController;
+    const { selectedTodo, todoDateFilter, todoActionState, dateSelected, onDateChange, resetTodoActionState, createTodo, onTodoDateFilterChange, openView, clearSelectedTodo, goToEdit, handleDelete, editTodo} = props.todoController;
 
     const todoActionComponent = useMemo(() => {
         switch (todoActionState) {
@@ -27,13 +27,29 @@ export default function AppContent(props: Props) {
             case TodoActionState.ADD:
                 return <TaskForm close={resetTodoActionState} taskFormMode={TaskFormMode.ADD} dateSelected={dateSelected} createTodo={createTodo} />;
 
+            case TodoActionState.EDIT:
+                return <TaskForm 
+                    close={resetTodoActionState} 
+                    taskFormMode={TaskFormMode.EDIT}
+                    dateSelected={dateSelected}
+                    editTodo={editTodo}
+                    selectedTodo={selectedTodo}
+                />;
+
             case TodoActionState.VIEW:
-                return selectedTodo && <ViewTask todo={selectedTodo} close={() => {
-                    resetTodoActionState();
-                    clearSelectedTodo();
-                }} />;
+                return selectedTodo && (
+                    <ViewTask 
+                        todo={selectedTodo} 
+                        close={() => {
+                            resetTodoActionState();
+                            clearSelectedTodo();
+                        }}
+                        goToEdit={goToEdit}
+                        handleDelete={handleDelete}
+                    />
+                );
         }
-    }, [todoActionState, dateSelected, onDateChange, resetTodoActionState, createTodo, selectedTodo]);
+    }, [todoActionState, dateSelected, onDateChange, resetTodoActionState, createTodo, selectedTodo, clearSelectedTodo, goToEdit, handleDelete]);
 
     return (
         <div className="app-content container d-flex flex-row py-4">

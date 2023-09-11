@@ -6,15 +6,17 @@ import { TextArea, DateInput, TimeInput } from "../CustomInputs";
 import ReminderTile from "./RemiderTile";
 import CustomButton from "../Button";
 import { useForm } from "../../hooks/useForm";
-import { FormInput } from "../../react-app-env";
+import { FormInput, Todo } from "../../react-app-env";
 import { taskDate, taskEnd, taskStart, taskTitle } from "../../validators";
 import Alert from "../Alert";
 
 interface Props {
     dateSelected?: string;
+    selectedTodo?: Todo | null;
     close: VoidFunction;
     taskFormMode: TaskFormMode;
-    createTodo: (data: FormInput) => void;
+    createTodo?: (data: FormInput) => void;
+    editTodo?: (data: Todo) => void;
 }
 
 const defaultTaskFormState: FormInput = {
@@ -25,6 +27,8 @@ const defaultTaskFormState: FormInput = {
 }
 
 export default function TaskForm(props: Props) {
+    const { selectedTodo } = props;
+
     const titleHeader = useMemo(() => {
         switch (props.taskFormMode) {
             case TaskFormMode.ADD:
@@ -51,14 +55,21 @@ export default function TaskForm(props: Props) {
         
         if (error) return setError(error);
 
-        const create = () => props.createTodo({
+        const data = {
             date: taskForm.date,
             start: taskForm.start,
             end: taskForm.end,
             title: taskForm.title
+        };
+
+        const create = () => props.createTodo && props.createTodo(data);
+
+        const update = () => props.editTodo && selectedTodo && props.editTodo({
+            ...selectedTodo,
+            ...data
         });
 
-        setTimeout(create, RIPPLE_DELAY);
+        setTimeout(props.taskFormMode === TaskFormMode.ADD ? create : update, RIPPLE_DELAY);
     }
 
     const handleChange: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> = (e) => {
@@ -72,6 +83,15 @@ export default function TaskForm(props: Props) {
     }, [props.dateSelected, props.taskFormMode]);
 
     useEffect(() => setError(""), [taskForm.date, taskForm.end, taskForm.title, taskForm.start]);
+
+    useEffect(() => {
+        if (selectedTodo?.id) {
+            taskForm.onChange("title", selectedTodo.title);
+            taskForm.onChange("start", selectedTodo.start);
+            taskForm.onChange("end", selectedTodo.end);
+            taskForm.onChange("date", selectedTodo.date);
+        }
+    }, [selectedTodo?.id]);
 
     return (
         <form className="task-form" onSubmit={handleSubmit}>
@@ -125,7 +145,7 @@ export default function TaskForm(props: Props) {
                 />
 
                 <CustomButton
-                    title="Add"
+                    title={props.taskFormMode === TaskFormMode.ADD ? "Add" : "Save"}
                 />
             </div>
         </form>

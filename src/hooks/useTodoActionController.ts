@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { TodoActionState } from "../constants";
 import { FormInput, Todo } from "../react-app-env";
 import { useAppDispatch } from "./store";
-import { addTodo } from "../redux-store/features/todoSlice";
+import { addTodo, removeTodo, updateTodo } from "../redux-store/features/todoSlice";
 import { convertDateToInputString, logger } from "../utils";
 
 export const useTodoActionController = () => {
@@ -20,18 +20,43 @@ export const useTodoActionController = () => {
         setTodoActionState(TodoActionState.VIEW);
     }
     const clearSelectedTodo = () => setSelectedTodo(null);
-    const resetTodoActionState = () => setTodoActionState(TodoActionState.DEFAULT);
+    const resetTodoActionState = () => { 
+        setTodoActionState(TodoActionState.DEFAULT);
+        setSelectedTodo(null);
+    }
     const onDateChange = (date: Date) => {
         setDateSelected(convertDateToInputString(date));
         setTodoDateFilter(date);
     }
     const onTodoDateFilterChange = setTodoDateFilter;
 
-    const createTodo = (data: FormInput) => {
-        dispatch(addTodo(data));
+    const reset = () => {
         setDateSelected(convertDateToInputString(new Date()));
         setTodoActionState(TodoActionState.DEFAULT);
         setSelectedTodo(null);
+    }
+
+    const createTodo = (data: FormInput) => {
+        dispatch(addTodo(data));
+        reset();
+    }
+
+    const editTodo = (data: Todo) => {
+        dispatch(updateTodo(data)); 
+        reset(); 
+    }
+
+    const goToEdit = () => {
+        if (selectedTodo) {
+            setTodoActionState(TodoActionState.EDIT);
+        }
+    }
+
+    const handleDelete = () => {
+        if (selectedTodo) {
+            dispatch(removeTodo(selectedTodo));
+            setTodoActionState(TodoActionState.DEFAULT);
+        }
     }
 
     useEffect(() => {
@@ -39,7 +64,7 @@ export const useTodoActionController = () => {
         setTodoActionState(TodoActionState.DEFAULT);
     }, [todoDateFilter]);
 
-    return {selectedTodo, dateSelected, todoDateFilter, todoActionState, openCreate, onDateChange, resetTodoActionState, createTodo, onTodoDateFilterChange, openView, clearSelectedTodo};
+    return {selectedTodo, dateSelected, todoDateFilter, todoActionState, openCreate, onDateChange, resetTodoActionState, createTodo, onTodoDateFilterChange, openView, clearSelectedTodo, goToEdit, handleDelete, editTodo};
 }
 
 export type UseTodoActionController = ReturnType<typeof useTodoActionController>;
