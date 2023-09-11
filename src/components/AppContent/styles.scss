@@ -72,5 +72,52 @@
                 }
             }
         }
+
+        .view-task {
+            width: 100%;
+
+            h3 {
+                color: var(--gray-900, #101828);
+                font-family: "Work Sans";
+                font-size: 1.8rem;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 155.556%;
+                text-transform: capitalize;
+            }
+
+            &__details {
+                & > div {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    margin-bottom: 8px;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+
+                span {
+                    color: var(--foundation-grey-normal, #272727);
+                    font-size: 1.6rem;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 120%;
+
+                    &.time-range {
+                        text-transform: uppercase;
+                    }
+                }
+            }
+
+            &__actions {
+                gap: 16px;
+
+                button {
+                    flex: 1;
+                }
+            }
+        }
     }
 }

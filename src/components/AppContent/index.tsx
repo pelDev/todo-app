@@ -8,6 +8,7 @@ import TaskForm from "./TaskForm";
 import AutoAnimateHeight from "../AutoAnimateHeight";
 import HorizontalCalendar from "../HorizontalCalendar";
 import TaskList from "./TaskList";
+import ViewTask from "./ViewTask";
 
 interface Props {
     todoController: UseTodoActionController;
@@ -16,7 +17,7 @@ interface Props {
 export default function AppContent(props: Props) {
     useEffect(() => logger("Render AppContent"), []);
 
-    const { todoDateFilter, todoActionState, dateSelected, onDateChange, resetTodoActionState, createTodo, onTodoDateFilterChange } = props.todoController;
+    const { selectedTodo, todoDateFilter, todoActionState, dateSelected, onDateChange, resetTodoActionState, createTodo, onTodoDateFilterChange, openView, clearSelectedTodo } = props.todoController;
 
     const todoActionComponent = useMemo(() => {
         switch (todoActionState) {
@@ -25,15 +26,21 @@ export default function AppContent(props: Props) {
 
             case TodoActionState.ADD:
                 return <TaskForm close={resetTodoActionState} taskFormMode={TaskFormMode.ADD} dateSelected={dateSelected} createTodo={createTodo} />;
+
+            case TodoActionState.VIEW:
+                return selectedTodo && <ViewTask todo={selectedTodo} close={() => {
+                    resetTodoActionState();
+                    clearSelectedTodo();
+                }} />;
         }
-    }, [todoActionState, dateSelected, onDateChange, resetTodoActionState, createTodo]);
+    }, [todoActionState, dateSelected, onDateChange, resetTodoActionState, createTodo, selectedTodo]);
 
     return (
         <div className="app-content container d-flex flex-row py-4">
             <AutoAnimateHeight className="todo-content-container">
                 <HorizontalCalendar dateSelected={dateSelected} todoDateFilter={todoDateFilter} onTodoDateFilterChange={onTodoDateFilterChange} />
 
-                <TaskList todoDateFilter={todoDateFilter} />
+                <TaskList todoDateFilter={todoDateFilter} selectTodo={openView} selectedTodo={selectedTodo} />
             </AutoAnimateHeight>
 
             <AutoAnimateHeight className="todo-actions-container">

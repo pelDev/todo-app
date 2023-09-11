@@ -74,3 +74,30 @@ export const isDateSame = (dateA: Date, dateB: Date): boolean => {
             && dateA.getFullYear() === dateB.getFullYear()
     )
 }
+
+const nthNumber = (number: number) => {
+  if (number > 3 && number < 21) return number + "th";
+  switch (number % 10) {
+    case 1:
+      return number + "st";
+    case 2:
+      return number + "nd";
+    case 3:
+      return number + "rd";
+    default:
+      return number + "th";
+  }
+};
+
+export const getDateString = (date: Date | string) => {
+    if (typeof date === "string") {
+        date = new Date(date);
+    }
+
+    let day: string | number = date.getDate();
+    day = nthNumber(day);
+    const monthName = getMonthName(date.getMonth());
+    const year = date.getFullYear();
+
+    return `${day} ${monthName}, ${year}`;
+}

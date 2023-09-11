@@ -18,6 +18,8 @@
         padding: 16px 24px;
         gap: 16px;
         transition: all 0.2s linear;
+        cursor: pointer;
+        overflow: hidden;
 
         .left {
             gap: 16px;
@@ -55,6 +57,9 @@
         }
 
         &.complete {
+            &:hover {
+                background: var(--gray-50, #F9FAFB);
+            }
             .left {
                 & > div {
                     span {
@@ -66,6 +71,11 @@
                     }
                 }
             }
+        }
+
+        &.selected,
+        &:hover {
+            background-color: #EAEDFE;
         }
     }
 }

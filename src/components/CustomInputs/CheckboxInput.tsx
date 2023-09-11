@@ -9,7 +9,7 @@ export function Checkbox(props: Props) {
     return (
         <div className="checkbox-wrapper">
             <label>
-                <input type="checkbox" checked={isChecked} onChange={onChecked} />
+                <input type="checkbox" checked={isChecked} onChange={onChecked} onClick={(e) => e.stopPropagation()} />
             </label>
         </div>
     );
