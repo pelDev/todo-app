@@ -11,3 +11,5 @@ export enum TaskFormMode {
 }
 
 export const RIPPLE_DELAY = 300;
+
+export const DOTS = "DOTS";

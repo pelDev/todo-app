@@ -1,9 +1,11 @@
 .app-content {
-    gap: 32px;
+    gap: 20px;
     font-size: 1.4rem;
 
     .todo-content-container {
         flex: 3;
+        border-right: 1px solid #EAECF0;
+        padding-right: 20px;
     }
 
     .todo-actions-container {
