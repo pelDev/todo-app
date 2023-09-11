@@ -3,11 +3,19 @@ import { useAppSelector } from "../../../hooks/store";
 import { selectTodos } from "../../../redux-store/features/todoSlice";
 import "./styles.scss";
 import TaskTile from "./TaskTile";
+import { isDateSame } from "../../../utils";
 
-export default function TaskList() {
+interface Props {
+    todoDateFilter: Date;
+}
+
+export default function TaskList(props: Props) {
+    const { todoDateFilter } = props;
     const todos = useAppSelector(selectTodos);
 
-    console.log("todos", todos);
+    const filtered = useMemo(() => {
+        return todos.filter((todo) => isDateSame(todoDateFilter, new Date(todo.date)))
+    }, [todos, todoDateFilter]);
 
     return (
         <div className="task-list mt-5">
@@ -15,9 +23,9 @@ export default function TaskList() {
 
             <div className="task-container mt-4 d-flex flex-column">
                 {
-                    useMemo(() => todos.map((todo) => (
+                    useMemo(() => filtered.map((todo) => (
                         <TaskTile key={`task-tile-${todo.id}`} todo={todo} />
-                    )), [todos])
+                    )), [filtered])
                 }
             </div>
         </div>

@@ -15,7 +15,6 @@ export const startOfWeek = (date: Date) => {
 }
 
 export const next10Days = (offsetDate: Date) => {
-    const month = offsetDate.getMonth();
     const result = [offsetDate];
 
     for (let i = 1; i <= 10; i++) {

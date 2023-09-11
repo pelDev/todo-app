@@ -33,7 +33,7 @@ export default function AppContent(props: Props) {
             <AutoAnimateHeight className="todo-content-container">
                 <HorizontalCalendar dateSelected={dateSelected} todoDateFilter={todoDateFilter} onTodoDateFilterChange={onTodoDateFilterChange} />
 
-                <TaskList />
+                <TaskList todoDateFilter={todoDateFilter} />
             </AutoAnimateHeight>
 
             <AutoAnimateHeight className="todo-actions-container">
