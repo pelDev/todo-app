@@ -9,15 +9,24 @@ interface Props {
     close: VoidFunction;
     goToEdit: VoidFunction;
     handleDelete: VoidFunction;
+    handleClose?: VoidFunction;
 }
 
 export default function ViewTask(props: Props) {
     const { todo } = props;
 
+    const closeForm = () => 
+        props.handleClose ? props.handleClose() : props.close();
+
+    const handleDelete = () => {
+        props.handleDelete();
+        closeForm();
+    }
+
     return (
         <div className="view-task">
             <div className="view-task_header d-flex flex-row justify-content-end align-items-center mb-2">
-                <CustomIconButton onClick={props.close}>
+                <CustomIconButton onClick={closeForm}>
                     <CloseIcon />
                 </CustomIconButton>
             </div>
@@ -50,7 +59,7 @@ export default function ViewTask(props: Props) {
                 <CustomButton
                     title="Delete"
                     variant="secondary"
-                    onClick={props.handleDelete}
+                    onClick={handleDelete}
                 />
 
                 <CustomButton

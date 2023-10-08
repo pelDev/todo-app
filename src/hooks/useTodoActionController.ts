@@ -48,7 +48,6 @@ export const useTodoActionController = () => {
     const handleDelete = () => {
         if (selectedTodo) {
             dispatch(removeTodo(selectedTodo));
-            setTodoActionState(TodoActionState.DEFAULT);
         }
     }
 

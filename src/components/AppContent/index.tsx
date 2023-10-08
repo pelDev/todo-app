@@ -38,7 +38,6 @@ export default function AppContent(props: Props) {
     }
 
     const openViewModal = (todo: Todo) => {
-        logger(windowSize);
         if (windowSize.width <= 768) setShowModal(true);
         props.todoController.openView(todo);
     };
