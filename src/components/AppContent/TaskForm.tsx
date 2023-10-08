@@ -18,7 +18,6 @@ interface Props {
     taskFormMode: TaskFormMode;
     createTodo?: (data: FormInput) => void;
     editTodo?: (data: Todo) => void;
-    // closeModal: VoidFunction;
     handleClose?: VoidFunction;
 }
 
@@ -51,7 +50,10 @@ export default function TaskForm(props: Props) {
 
     const [error, setError] = useState(""); 
 
-    const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+    const closeForm = () => 
+        props.handleClose ? props.handleClose() : props.close();
+
+    const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
 
         setError(""); // clear existing error
@@ -74,7 +76,14 @@ export default function TaskForm(props: Props) {
             ...data
         });
 
-        setTimeout(props.taskFormMode === TaskFormMode.ADD ? create : update, RIPPLE_DELAY);
+        await new Promise<void>((res) => {
+            setTimeout(() => {
+                props.taskFormMode === TaskFormMode.ADD ? create() : update();
+                res();
+            }, RIPPLE_DELAY);
+        });
+        
+        closeForm();
     }
 
     const handleChange: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> = (e) => {
@@ -99,9 +108,6 @@ export default function TaskForm(props: Props) {
         }
         // eslint-disable-next-line
     }, [selectedTodo, taskForm.onChange, props.taskFormMode]);
-
-    const closeForm = () => 
-        props.handleClose ? props.handleClose() : props.close();
 
     return (
         <form className="task-form" onSubmit={handleSubmit}>

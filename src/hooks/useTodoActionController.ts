@@ -33,12 +33,10 @@ export const useTodoActionController = () => {
 
     const createTodo = (data: FormInput) => {
         dispatch(addTodo(data));
-        resetTodoActionState();
     }
 
     const editTodo = (data: Todo) => {
-        dispatch(updateTodo(data)); 
-        resetTodoActionState(); 
+        dispatch(updateTodo(data));
     }
 
     const goToEdit = () => {

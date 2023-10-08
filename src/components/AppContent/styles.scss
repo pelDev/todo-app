@@ -17,107 +17,108 @@
         background: var(--base-white, #FFF);
         box-shadow: 0px 8px 8px -4px rgba(16, 24, 40, 0.03), 0px 20px 24px -4px rgba(16, 24, 40, 0.08);
         overflow: hidden;
+    }
+}
 
-        .task-form {
-            width: 100%;
+.task-form {
+    width: 100%;
 
-            &__header {
-                h3 {
-                    color: var(--gray-900, #101828);
-                    font-family: "Work Sans";
-                    font-size: 1.8rem;
-                    font-style: normal;
-                    font-weight: 600;
-                    line-height: 155.556%;
-                }
+    &__header {
+        h3 {
+            color: var(--gray-900, #101828);
+            font-family: "Work Sans";
+            font-size: 1.8rem;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 155.556%;
+        }
+    }
+
+    &>.date-time-inputs {
+        gap: 16px;
+
+        input.custom-input {
+            flex: 1;
+
+            &:first-child {
+                min-width: 150px;
             }
+        }
+    }
 
-            & > .date-time-inputs {
-                gap: 16px;
+    .reminder-tile {
+        gap: 16px;
+        font-size: 1.6rem;
+        font-weight: 500;
+        font-family: 'Inter';
+        color: var(--gray-500);
 
-                input.custom-input {
-                    flex: 1;
-                    &:first-child {
-                        min-width: 150px;
-                    }
-                }
+        .bellIcon {
+            height: 16px;
+            width: 16px;
+            fill: #667085;
+        }
+
+        .close {
+            svg {
+                height: 16px;
+                width: 16px;
             }
+        }
+    }
 
-            .reminder-tile {
-                gap: 16px;
-                font-size: 1.6rem;
-                font-weight: 500;
-                font-family: 'Inter';
-                color: var(--gray-500);
-                
-                .bellIcon {
-                    height: 16px;
-                    width: 16px;
-                    fill: #667085;
-                }
-                
-                .close {
-                    svg {
-                        height: 16px;
-                        width: 16px;
-                    }
-                }
-            }
+    .actions {
+        gap: 16px;
 
-            .actions {
-                gap: 16px;
+        .custom-button {
+            flex: 1;
+        }
+    }
+}
 
-                .custom-button {
-                    flex: 1;
-                }
+.view-task {
+    width: 100%;
+
+    h3 {
+        color: var(--gray-900, #101828);
+        font-family: "Work Sans";
+        font-size: 1.8rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 155.556%;
+        text-transform: capitalize;
+    }
+
+    &__details {
+        &>div {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+
+            &:last-child {
+                margin-bottom: 0;
             }
         }
 
-        .view-task {
-            width: 100%;
+        span {
+            color: var(--foundation-grey-normal, #272727);
+            font-size: 1.6rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 120%;
 
-            h3 {
-                color: var(--gray-900, #101828);
-                font-family: "Work Sans";
-                font-size: 1.8rem;
-                font-style: normal;
-                font-weight: 600;
-                line-height: 155.556%;
-                text-transform: capitalize;
+            &.time-range {
+                text-transform: uppercase;
             }
+        }
+    }
 
-            &__details {
-                & > div {
-                    display: flex;
-                    align-items: center;
-                    gap: 8px;
-                    margin-bottom: 8px;
+    &__actions {
+        gap: 16px;
 
-                    &:last-child {
-                        margin-bottom: 0;
-                    }
-                }
-
-                span {
-                    color: var(--foundation-grey-normal, #272727);
-                    font-size: 1.6rem;
-                    font-style: normal;
-                    font-weight: 500;
-                    line-height: 120%;
-
-                    &.time-range {
-                        text-transform: uppercase;
-                    }
-                }
-            }
-
-            &__actions {
-                gap: 16px;
-
-                button {
-                    flex: 1;
-                }
-            }
+        button {
+            flex: 1;
         }
     }
 }
@@ -128,6 +129,12 @@
         .todo-content-container {
             padding-right: 0;
             border-right: none;
+        }
+    }
+
+    .task-form {
+        &>.date-time-inputs {
+            gap: 8px;
         }
     }
 }
