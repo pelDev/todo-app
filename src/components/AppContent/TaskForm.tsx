@@ -18,7 +18,8 @@ interface Props {
     taskFormMode: TaskFormMode;
     createTodo?: (data: FormInput) => void;
     editTodo?: (data: Todo) => void;
-    closeModal: VoidFunction;
+    // closeModal: VoidFunction;
+    handleClose?: VoidFunction;
 }
 
 const defaultTaskFormState: FormInput = {
@@ -99,12 +100,15 @@ export default function TaskForm(props: Props) {
         // eslint-disable-next-line
     }, [selectedTodo, taskForm.onChange, props.taskFormMode]);
 
+    const closeForm = () => 
+        props.handleClose ? props.handleClose() : props.close();
+
     return (
         <form className="task-form" onSubmit={handleSubmit}>
             <div className="task-form__header d-flex flex-row justify-content-between align-items-center mb-2">
                 <h3>{titleHeader}</h3>
 
-                <CustomIconButton onClick={props.close}>
+                <CustomIconButton onClick={closeForm}>
                     <CloseIcon />
                 </CustomIconButton>
             </div>
@@ -147,7 +151,7 @@ export default function TaskForm(props: Props) {
                     title="Cancel"
                     type="button"
                     variant="secondary"
-                    onClick={props.close}
+                    onClick={closeForm}
                 />
 
                 <CustomButton

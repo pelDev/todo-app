@@ -44,7 +44,7 @@ export default function AppContent(props: Props) {
                     taskFormMode={TaskFormMode.ADD} 
                     dateSelected={dateSelected} 
                     createTodo={createTodo}
-                    closeModal={closeModal}
+                    // closeModal={closeModal}
                 />;
 
             case TodoActionState.EDIT:
@@ -54,7 +54,7 @@ export default function AppContent(props: Props) {
                     dateSelected={dateSelected}
                     editTodo={editTodo}
                     selectedTodo={selectedTodo}
-                    closeModal={closeModal}
+                    // closeModal={closeModal}
                 />;
 
             case TodoActionState.VIEW:
@@ -70,7 +70,18 @@ export default function AppContent(props: Props) {
                     />
                 );
         }
-    }, [todoActionState, dateSelected, onDateChange, resetTodoActionState, createTodo, selectedTodo, clearSelectedTodo, goToEdit, handleDelete, editTodo, closeModal]);
+    }, [
+        todoActionState, 
+        dateSelected, 
+        onDateChange, 
+        resetTodoActionState, 
+        createTodo, 
+        selectedTodo, 
+        clearSelectedTodo, 
+        goToEdit, 
+        handleDelete, 
+        editTodo,
+    ]);
 
     return (
         <>
